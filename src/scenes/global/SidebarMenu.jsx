@@ -106,7 +106,11 @@ const SidebarMenu = () => {
           {/* LOGO & MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={<MenuOutlinedIcon sx={{ color: colors.gray[100] }} />}
+            icon={
+              isCollapsed && (
+                <MenuOutlinedIcon sx={{ color: colors.gray[100] }} />
+              )
+            }
             rootStyles={{
               "& .ps-menu-button:hover": {
                 backgroundColor: "transparent !important",
@@ -123,7 +127,12 @@ const SidebarMenu = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.gray[100]}>
+                <MenuOutlinedIcon sx={{ color: colors.gray[100] }} />
+                <Typography
+                  variant="h3"
+                  color={colors.gray[100]}
+                  textAlign="right"
+                >
                   ADMINS
                 </Typography>
               </Box>
