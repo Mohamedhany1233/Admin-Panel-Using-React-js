@@ -7,7 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import Topbar from "./scenes/global/Topbar";
 import Dashboard from "./scenes/dashboard/index";
 import SiderBarMenu from "./scenes/global/SidebarMenu";
-import Team from "./scenes/Team";
+import Team from "./scenes/team";
 import Contacts from "./scenes/contacts";
 import Invoices from "./scenes/invoices";
 import Form from "./scenes/form";
