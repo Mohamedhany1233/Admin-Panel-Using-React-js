@@ -213,7 +213,7 @@ const Dashboard = () => {
             </IconButton>
           </Box>
           {/* CHART */}
-          <Box overflow="hidden" mt="8px">
+          <Box overflow="hidden" mt="8px" height="100% !important">
             <AreaChart_ />
           </Box>
         </Box>

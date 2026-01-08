@@ -271,7 +271,7 @@ const SidebarMenu = () => {
             />
             <Item
               title="Area Chart"
-              to="/line"
+              to="/area"
               icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
