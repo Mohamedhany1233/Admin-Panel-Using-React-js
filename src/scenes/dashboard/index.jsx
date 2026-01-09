@@ -293,7 +293,7 @@ const Dashboard = () => {
         <Box gridColumn="span 4" bgcolor={colors.primary[400]} p="30px">
           {/* header */}
           <Typography variant="h5" fontWeight="600" mb="15px">
-            Geography Based Traff ic
+            Geography Based Traffic
           </Typography>
 
           {/* content */}
