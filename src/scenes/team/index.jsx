@@ -1,5 +1,5 @@
 // mui components
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
 // mui Icons
@@ -17,9 +17,14 @@ import { mockDataTeam } from "../../Data/mockData";
 const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const columns = [
-    { field: "id", headerName: "ID" },
+    {
+      field: "id",
+      headerName: "ID",
+      flex: 0.4,
+    },
     {
       field: "name",
       headerName: "Name",
@@ -30,58 +35,74 @@ const Team = () => {
       field: "age",
       headerName: "Age",
       type: "number",
-      headerAlign: "left",
-      align: "left",
+      flex: 0.4,
+      hide: isMobile, // 👈 يتشال على الموبايل
     },
     {
       field: "phone",
-      headerName: "Phone Number",
+      headerName: "Phone",
       flex: 1,
+      hide: isMobile, // 👈 يتشال على الموبايل
     },
     {
       field: "email",
       headerName: "Email",
-      flex: 1,
+      flex: 1.2,
+      hide: isMobile, // 👈 يتشال على الموبايل
     },
     {
       field: "access",
-      headerName: "Access Level",
+      headerName: "Access",
       flex: 1,
-      renderCell: ({ row: { access } }) => {
-        return (
-          <Box
-            width="60%"
-            m="10px auto"
-            p="5px"
-            display="flex"
-            justifyContent="center"
-            bgcolor={
-              access === "admin"
-                ? colors.greenAccent[600]
-                : colors.greenAccent[700]
-            }
-            borderRadius="4px"
+      renderCell: ({ row: { access } }) => (
+        <Box
+          width={isMobile ? "100%" : "60%"}
+          m="10px auto"
+          p="5px"
+          display="flex"
+          justifyContent="center"
+          bgcolor={
+            access === "admin"
+              ? colors.greenAccent[600]
+              : colors.greenAccent[700]
+          }
+          borderRadius="4px"
+        >
+          {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
+          {access === "manager" && <SecurityOutlinedIcon />}
+          {access === "user" && <LockOpenOutlinedIcon />}
+          <Typography
+            color={colors.gray[100]}
+            sx={{ ml: "5px", fontSize: isMobile ? "12px" : "14px" }}
           >
-            {access === "admin" ? <AdminPanelSettingsOutlinedIcon /> : ""}
-            {access === "manager" ? <SecurityOutlinedIcon /> : ""}
-            {access === "user" ? <LockOpenOutlinedIcon /> : ""}
-            <Typography color={colors.gray[100]} sx={{ ml: "5px" }}>
-              {access}
-            </Typography>
-          </Box>
-        );
-      },
+            {access}
+          </Typography>
+        </Box>
+      ),
     },
   ];
 
   return (
     <Box m="20px">
       <Header title="TEAM" subtitle="Managing the Team Members" />
-      <Box m="40px 0 0 0" height="75vh">
+      <Box
+        m="40px 0 0 0"
+        height="75vh"
+        sx={{
+          "@media (max-width:600px)": {
+            width: "800px",
+          },
+          overflowX: "auto",
+        }}
+        width="auto"
+      >
         <DataGrid
           rows={mockDataTeam}
           columns={columns}
           sx={{
+            "@media (max-width:840px)": {
+              width: "1400px",
+            },
             "& .MuiDataGrid-root": {
               border: "none",
             },
@@ -104,7 +125,6 @@ const Team = () => {
             "& .MuiTablePagination-root": {
               color: colors.gray[100],
             },
-
             "& .MuiTablePagination-selectIcon": {
               color: colors.gray[100],
             },

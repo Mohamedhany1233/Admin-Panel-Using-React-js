@@ -59,12 +59,24 @@ const Invoices = () => {
   return (
     <Box m="20px">
       <Header title="Invoices" subtitle="The List Of Invoices Balances" />
-      <Box m="40px 0 0 0" height="75vh">
+      <Box
+        m="40px 0 0 0"
+        height="75vh"
+        sx={{
+          "@media (max-width:600px)": {
+            width: "800px",
+          },
+          overflowX: "auto",
+        }}
+      >
         <DataGrid
           rows={mockDataInvoices}
           columns={columns}
           checkboxSelection
           sx={{
+            "@media (max-width:840px)": {
+              width: "1400px",
+            },
             "& .MuiDataGrid-root": {
               border: "none",
             },

@@ -59,9 +59,20 @@ const Dashboard = () => {
   return (
     <Box m="20px">
       {/* SEARCH & DOWNLOAD BUTTON */}
-      <Box display="flex" justifyContent="space-between">
-        <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        sx={{
+          "@media (max-width:740px)": {
+            flexDirection: "column-reverse",
+            textAlign: "center",
+          },
+        }}
+      >
         <Box>
+          <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+        </Box>
+        <Box order="1">
           <Button
             sx={{
               bgcolor: colors.blueAccent[700],
@@ -73,6 +84,13 @@ const Dashboard = () => {
               transition: "ease 0.3s ",
               ":hover": {
                 bgcolor: "transparent",
+              },
+              "@media (max-width:740px)": {
+                mb: "30px",
+                width: "50%",
+              },
+              "@media (max-width:540px)": {
+                width: "80%",
               },
             }}
           >
@@ -87,7 +105,14 @@ const Dashboard = () => {
         display="grid"
         gridTemplateColumns="repeat(12,1fr)"
         gap="20px"
-        height="150px"
+        sx={{
+          "@media (max-width:1360px)": {
+            gridTemplateColumns: "repeat(4,2fr)",
+          },
+          "@media (max-width:600px)": {
+            gridTemplateColumns: "repeat(1,2fr)",
+          },
+        }}
       >
         <Box
           gridColumn="span 3"
@@ -95,6 +120,12 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          height="150px"
+          sx={{
+            "@media (max-width:1360px)": {
+              gridColumn: "span 2",
+            },
+          }}
         >
           <Statebox
             title="12,361"
@@ -114,6 +145,12 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          height="150px"
+          sx={{
+            "@media (max-width:1360px)": {
+              gridColumn: "span 2",
+            },
+          }}
         >
           <Statebox
             title="431.225"
@@ -133,6 +170,12 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          height="150px"
+          sx={{
+            "@media (max-width:1360px)": {
+              gridColumn: "span 2",
+            },
+          }}
         >
           <Statebox
             title="32.441"
@@ -152,6 +195,12 @@ const Dashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
+          height="150px"
+          sx={{
+            "@media (max-width:1360px)": {
+              gridColumn: "span 2",
+            },
+          }}
         >
           <Statebox
             title="12,325,134"
@@ -169,11 +218,16 @@ const Dashboard = () => {
 
       {/* GRID & CHARTS == ROW 2 */}
       <Box
-        height="400px"
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
+        gridTemplateRows="400px"
         gap="20px"
         mt={2}
+        sx={{
+          "@media (max-width:1350px)": {
+            gridTemplateColumns: "repeat(1, 1fr)",
+          },
+        }}
       >
         {/* LINE CHART */}
         <Box
@@ -182,7 +236,15 @@ const Dashboard = () => {
           p="30px"
           display="flex"
           flexDirection="column"
-          minHeight={0}
+          sx={{
+            "@media (max-width:1350px)": {
+              gridColumn: "span 8",
+              gridRow: "span 2 !important",
+            },
+            "@media (max-width:600px)": {
+              p: "20px",
+            },
+          }}
         >
           {/* HEADER */}
           <Box
@@ -213,7 +275,16 @@ const Dashboard = () => {
             </IconButton>
           </Box>
           {/* CHART */}
-          <Box overflow="hidden" mt="8px" height="100% !important">
+          <Box
+            overflow="hidden"
+            mt="8px"
+            height="100% !important"
+            sx={{
+              "@media (max-width:1350px)": {
+                height: "300px !important",
+              },
+            }}
+          >
             <AreaChart_ />
           </Box>
         </Box>
@@ -224,8 +295,12 @@ const Dashboard = () => {
           bgcolor={colors.primary[400]}
           p="16px"
           overflow="auto"
-          gridTemplateRows="span 2"
-          minHeight={0}
+          sx={{
+            "@media (max-width:1350px)": {
+              height: "300px !important",
+              gridColumn: "span 8",
+            },
+          }}
         >
           <Box
             display="flex"
@@ -249,12 +324,29 @@ const Dashboard = () => {
         gridTemplateColumns="repeat(12, 1fr)"
         gap="20px"
         mt={2}
+        sx={{
+          "@media (max-width:1350px)": {
+            gridTemplateColumns: "repeat(2, 1fr)",
+          },
+          "@media (max-width:600px)": {
+            gridTemplateColumns: "repeat(1, 1fr)",
+          },
+        }}
       >
         <Box
           gridColumn="span 4"
           bgcolor={colors.primary[400]}
           p="30px"
           height="100%"
+          textAlign="center"
+          sx={{
+            "@media (max-width:1350px)": {
+              gridColumn: "auto",
+            },
+            "@media (max-width:740px)": {
+              gridColumn: "span 2",
+            },
+          }}
         >
           {/* header */}
           <Typography variant="h5" fontWeight="600">
@@ -276,10 +368,23 @@ const Dashboard = () => {
             >
               $48,352 revenue generated
             </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
+            <Typography textAlign="center" mt="10px">
+              Includes extra misc expenditures and costs
+            </Typography>
           </Box>
         </Box>
-        <Box gridColumn="span 4" bgcolor={colors.primary[400]}>
+        <Box
+          gridColumn="span 4"
+          bgcolor={colors.primary[400]}
+          sx={{
+            "@media (max-width:1350px)": {
+              gridColumn: "auto",
+            },
+            "@media (max-width:740px)": {
+              gridColumn: "span 2",
+            },
+          }}
+        >
           {/* header */}
           <Typography variant="h5" fontWeight="600" p="25px 30px 0 30px">
             Sales Quantity
@@ -290,14 +395,26 @@ const Dashboard = () => {
             <BarChart_ isDashboard={true} />
           </Box>
         </Box>
-        <Box gridColumn="span 4" bgcolor={colors.primary[400]} p="30px">
+        <Box
+          gridColumn="span 4"
+          bgcolor={colors.primary[400]}
+          p="30px"
+          sx={{
+            "@media (max-width:1350px)": {
+              gridColumn: "span 2",
+            },
+            "@media (max-width:740px)": {
+              gridColumn: "span 2",
+            },
+          }}
+        >
           {/* header */}
           <Typography variant="h5" fontWeight="600" mb="15px">
             Geography Based Traffic
           </Typography>
 
           {/* content */}
-          <Box height="250px">
+          <Box height="200px">
             <GeographyChart isDashboard={true} />
           </Box>
         </Box>

@@ -15,7 +15,7 @@ const GeographyChart = ({ isDashboard = false }) => {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <Box sx={{ width: "100%", height: "100%" }}>
+    <Box sx={{ height: "100% !important" }}>
       <ResponsiveChoropleth
         data={data}
         features={geoFeatures.features}

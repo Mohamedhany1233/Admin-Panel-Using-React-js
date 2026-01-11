@@ -63,12 +63,24 @@ const Contacts = () => {
         title="Contacts"
         subtitle="The List Of Contacts For Future Refrence"
       />
-      <Box m="40px 0 0 0" height="75vh">
+      <Box
+        m="40px 0 0 0"
+        height="75vh"
+        sx={{
+          "@media (max-width:600px)": {
+            width: "800px",
+          },
+          overflowX: "auto",
+        }}
+      >
         <DataGrid
           rows={mockDataContacts}
           columns={columns}
           slots={{ toolbar: GridToolbar }}
           sx={{
+            "@media (max-width:840px)": {
+              width: "2000px",
+            },
             "& .MuiDataGrid-root": {
               border: "none",
             },

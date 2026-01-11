@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 // react pro sidebar
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 
 // mui components
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 
 // mui icons
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -19,7 +19,6 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlinedIcon from "@mui/icons-material/PieChartOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 // react router dom
 import { Link } from "react-router";
@@ -27,6 +26,10 @@ import { useLocation } from "react-router";
 
 // userImg
 import userImg from "../../assets/user.png";
+
+// contexts
+import { isCollapsedSidebar } from "../../contexts/IsCollapsedSidebar";
+import { isToggledSidebar } from "../../contexts/IsCollapsedSidebar";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -48,10 +51,18 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const SidebarMenu = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  // states
   const [selected, setSelected] = useState("Dashboard");
+  const { isCollapsed, setIsCollapsed } = useContext(isCollapsedSidebar);
+  const { isToggled, setIsToggled } = useContext(isToggledSidebar);
+
+  // location
   const location = useLocation().pathname;
 
+  // queries
+  const isLaptop = useMediaQuery(theme.breakpoints.down("md"));
+
+  // locations
   const routeMap = {
     "/": "Dashboard",
     "/team": "Manage Team",
@@ -73,72 +84,32 @@ const SidebarMenu = () => {
   return (
     <Box>
       <Sidebar
+        breakPoint="md"
         collapsed={isCollapsed}
-        collapsedWidth="80px"
+        toggled={isToggled}
+        onClick={() => setIsToggled(false)}
         rootStyles={{
-          position: "relative",
           height: "100vh",
-          width: "32vh",
+          width: !isLaptop ? "300px" : "0px",
           borderRight: "none",
           backgroundColor: "transparent",
+          overflowY: "auto",
           "& .ps-sidebar-container": {
             backgroundColor: colors.primary[400],
+            height: "100%",
+            overflowY: "auto",
           },
           "& .ps-menuitem-root.ps-active > .ps-menu-button": {
             backgroundColor: "rgba(255,255,255,0.08)",
             color: "#4cceac",
             borderLeft: "4px solid #4cceac",
           },
-
-          "& .ps-menuitem-root.ps-active .ps-menu-icon": {
-            color: "#4cceac",
-          },
-
-          "& .ps-menuitem-root.ps-active .ps-menu-label": {
-            fontWeight: "600",
-          },
           "& .ps-menu-button:hover": {
             backgroundColor: "rgba(255,255,255,0.05) !important",
           },
         }}
       >
-        <Menu>
-          {/* LOGO & MENU ICON */}
-          <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={
-              isCollapsed && (
-                <MenuOutlinedIcon sx={{ color: colors.gray[100] }} />
-              )
-            }
-            rootStyles={{
-              "& .ps-menu-button:hover": {
-                backgroundColor: "transparent !important",
-              },
-            }}
-            style={{
-              margin: "10px 0 20px 0",
-            }}
-          >
-            {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
-                <MenuOutlinedIcon sx={{ color: colors.gray[100] }} />
-                <Typography
-                  variant="h3"
-                  color={colors.gray[100]}
-                  textAlign="right"
-                >
-                  ADMINS
-                </Typography>
-              </Box>
-            )}
-          </MenuItem>
-
+        <Menu style={{ marginTop: "30px" }}>
           {/* user Logo & name*/}
           {!isCollapsed && (
             <Box mb="25px">

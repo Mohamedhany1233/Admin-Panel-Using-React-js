@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 // calendar
-// import FullCalendar, { formatDate } from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
@@ -16,6 +15,7 @@ import {
   ListItemText,
   Typography,
   useTheme,
+  useMediaQuery,
 } from "@mui/material";
 
 // components
@@ -28,6 +28,8 @@ const Calendar = () => {
   const colors = tokens(theme.palette.mode);
 
   const [currentEvents, setCurrentEvents] = useState([]);
+
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleAddEvent = (selected) => {
     const title = prompt("Please enter a new title for your event");
@@ -74,7 +76,16 @@ const Calendar = () => {
   return (
     <Box m="20px">
       <Header title="CALENDAR" subtitle="Full calendar Interactive Page" />
-      <Box display="flex" justifyContent="space-between">
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        sx={{
+          "@media (max-width:760px)": {
+            flexDirection: "column",
+            gap: "50px",
+          },
+        }}
+      >
         {/* CALENDAR SIDEBAR */}
         <Box
           flex="1 1 20%"
@@ -94,7 +105,12 @@ const Calendar = () => {
           </List>
         </Box>
         {/* CALENDAR */}
-        <Box flex="1 1 100%" ml="15px">
+        <Box
+          flex="1 1 100%"
+          sx={{
+            ml: isMobile ? "4px" : "12px",
+          }}
+        >
           <FullCalendar
             height="75vh"
             plugins={[
@@ -103,11 +119,15 @@ const Calendar = () => {
               interactionPlugin,
               listPlugin,
             ]}
-            headerToolbar={{
-              left: "prev,next,today",
-              center: "title",
-              right: "dayGridMonth,timeGridWeek timeGridDay,listMonth",
-            }}
+            headerToolbar={
+              !isMobile
+                ? {
+                    left: "prev,next,today",
+                    center: "title",
+                    right: "dayGridMonth,timeGridWeek timeGridDay,listMonth",
+                  }
+                : { right: "prev,next" }
+            }
             initialView="dayGridMonth"
             editable={true}
             selectable={true}
