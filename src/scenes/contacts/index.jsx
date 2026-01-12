@@ -68,7 +68,8 @@ const Contacts = () => {
         height="75vh"
         sx={{
           "@media (max-width:600px)": {
-            width: "800px",
+            width: "100%",
+            borderRadius: "8px",
           },
           overflowX: "auto",
         }}
@@ -78,8 +79,8 @@ const Contacts = () => {
           columns={columns}
           slots={{ toolbar: GridToolbar }}
           sx={{
-            "@media (max-width:840px)": {
-              width: "2000px",
+            "@media (max-width:600px)": {
+              width: "1000px",
             },
             "& .MuiDataGrid-root": {
               border: "none",

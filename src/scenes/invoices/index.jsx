@@ -64,7 +64,8 @@ const Invoices = () => {
         height="75vh"
         sx={{
           "@media (max-width:600px)": {
-            width: "800px",
+            width: "100%",
+            borderRadius: "8px",
           },
           overflowX: "auto",
         }}
@@ -74,8 +75,8 @@ const Invoices = () => {
           columns={columns}
           checkboxSelection
           sx={{
-            "@media (max-width:840px)": {
-              width: "1400px",
+            "@media (max-width:600px)": {
+              width: "900px",
             },
             "& .MuiDataGrid-root": {
               border: "none",
