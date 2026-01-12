@@ -24,8 +24,10 @@ import Geography from "./scenes/geography";
 import { Route, Routes } from "react-router";
 
 // contexts
-import { isCollapsedSidebar } from "./contexts/IsCollapsedSidebar";
-import { isToggledSidebar } from "./contexts/IsCollapsedSidebar";
+import {
+  isCollapsedSidebar,
+  isToggledSidebar,
+} from "./contexts/isCollapsedSidebar";
 
 function App() {
   const [theme, colorMode] = useMode();

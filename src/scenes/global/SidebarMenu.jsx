@@ -28,8 +28,10 @@ import { useLocation } from "react-router";
 import userImg from "../../assets/user.png";
 
 // contexts
-import { isCollapsedSidebar } from "../../contexts/IsCollapsedSidebar";
-import { isToggledSidebar } from "../../contexts/IsCollapsedSidebar";
+import {
+  isCollapsedSidebar,
+  isToggledSidebar,
+} from "../../contexts/isCollapsedSidebar";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();

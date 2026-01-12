@@ -19,8 +19,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 // contexts
-import { isCollapsedSidebar } from "../../contexts/IsCollapsedSidebar";
-import { isToggledSidebar } from "../../contexts/IsCollapsedSidebar";
+import {
+  isCollapsedSidebar,
+  isToggledSidebar,
+} from "../../contexts/isCollapsedSidebar";
 
 const Topbar = () => {
   const theme = useTheme();
