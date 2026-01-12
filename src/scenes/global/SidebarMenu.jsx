@@ -75,12 +75,12 @@ const SidebarMenu = () => {
     "/faq": "FAQ Page",
     "/bar": "Bar Chart",
     "/pie": "Pie Chart",
-    "/line": "Line Chart",
+    "/area": "Area Chart",
     "/geo": "Geography Chart",
   };
 
   useEffect(() => {
-    setSelected(routeMap[location] || "");
+    setSelected(routeMap[location]);
   }, [location]);
 
   return (
