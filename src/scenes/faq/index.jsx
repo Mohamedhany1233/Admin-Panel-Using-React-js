@@ -24,7 +24,7 @@ const FAQ = () => {
         <Typography
           component="span"
           color={colors.greenAccent[300]}
-          fontWeight="500"
+          fontWeight="600"
           borderTop="none"
         >
           {title}
