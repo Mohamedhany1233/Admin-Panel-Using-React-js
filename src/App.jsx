@@ -5,7 +5,7 @@ import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import Loading from "./components/Loading";
 
 // react Router
-import { Route, Routes } from "react-router";
+import { Route, Routes, useLocation } from "react-router";
 
 // theme & dark_light  Mode
 import { ColorModeContext, useMode } from "./theme";
@@ -35,6 +35,7 @@ function App() {
   const [theme, colorMode] = useMode();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isToggled, setIsToggled] = useState(false);
+  const location = useLocation();
 
   return (
     // change mode color context
@@ -48,7 +49,7 @@ function App() {
           }}
         >
           <isToggledSidebar.Provider value={{ isToggled, setIsToggled }}>
-            <Suspense fallback={<Loading page_name="Loading Dashboard" />}>
+            <Suspense fallback={<Loading page_name="Loading Content" />}>
               <div className="app">
                 {/* Sidebar Menu on the left*/}
                 <SiderBarMenu />
@@ -65,7 +66,7 @@ function App() {
                       },
                     }}
                   >
-                    <Routes>
+                    <Routes key={location.pathname}>
                       <Route
                         path="/"
                         element={
